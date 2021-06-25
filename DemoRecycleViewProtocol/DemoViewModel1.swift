@@ -13,11 +13,7 @@ class DemoViewModel1: ItemViewModelProtocol {
     
     required init?(model: DemoModel1) {
         self.model = model
-        if let model = model as? DemoModel1 {
-            self.name = model.name
-        } else{
-            return nil
-        }
+        self.name = model.name
     }
     
 }

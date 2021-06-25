@@ -7,7 +7,8 @@
 
 import Foundation
 public protocol ListViewModelProtocol {
-    var sections: [SectionViewModelProtocol] { get set }
+    
+    var sections: Observable<[SectionViewModelProtocol]> { get set }
     
     func numberOfSection() -> Int
     func numberOfRowIn(section: Int) -> Int
@@ -20,13 +21,13 @@ public protocol ListViewModelProtocol {
 }
 public extension ListViewModelProtocol {
     func numberOfSection() -> Int{
-        return sections.count
+        return sections.value.count
     }
     func numberOfRowIn(section: Int) -> Int {
         return sectionAt(index: section).numberOfRowIn()
     }
     func sectionAt(index: Int) -> SectionViewModelProtocol {
-        return sections[index]
+        return sections.value[index]
     }
     func itemAt(indexPath: IndexPath) -> ItemViewModelProtocol {
         return sectionAt(index: indexPath.section).itemForRow(index: indexPath.row)

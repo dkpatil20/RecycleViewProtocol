@@ -8,10 +8,12 @@
 import Foundation
 import RecycleViewProtocol
 class ViewModel:  ListViewModelProtocol{
-    var sections: [SectionViewModelProtocol] = []
-    init() {
-        sections.append(DemoSection1())
-        sections.append(DemoSection1())
-    }
+    var sections: Observable<[SectionViewModelProtocol]> = Observable(value: [])
     
+    func creatSections() {
+        var sectionsArray = [SectionViewModelProtocol]()
+        sectionsArray.append(DemoSection1())
+        sectionsArray.append(DemoSection1())
+        sections = Observable(value: sectionsArray)
+    }
 }
