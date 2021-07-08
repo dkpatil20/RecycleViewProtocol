@@ -1,12 +1,12 @@
 //
-//  TableViewDataSource.swift
+//  DefaultTableViewDataSource.swift
 //  RecycleViewProtocol
 //
 //  Created by Dhiraj Kumar Patil on 25/06/21.
 //
 
 import UIKit
-public class TableViewDataSource: NSObject, UITableViewDataSource, TableViewProtocol , MapCellViewModel, GetTableViewModelProtocol{
+public class DefaultTableViewDataSource: NSObject, UITableViewDataSource, TableViewProtocol , MapCellViewModel, GetTableViewModelProtocol{
     
     let tableViewModelDelegate: GetTableViewModelProtocol
     let mapCellViewModelDelegate: MapCellViewModel

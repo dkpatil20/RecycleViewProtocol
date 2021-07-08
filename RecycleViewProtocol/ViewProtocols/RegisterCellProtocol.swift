@@ -7,5 +7,5 @@
 
 import Foundation
 public protocol RegisterCellProtocol {
-    func registerCell() -> Void
+    func registerCell()
 }

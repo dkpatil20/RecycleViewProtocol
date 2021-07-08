@@ -8,7 +8,7 @@
 import Foundation
 
 public class Observable<T> {
-    var value: T {
+    public var value: T {
         didSet {
             DispatchQueue.main.async {
                 self.valueChanged?(self.value)

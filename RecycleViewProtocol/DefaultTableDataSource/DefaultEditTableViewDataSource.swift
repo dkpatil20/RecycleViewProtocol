@@ -1,5 +1,5 @@
 //
-//  EditTableViewDataSource.swift
+//  DefaultEditTableViewDataSource.swift
 //  RecycleViewProtocol
 //
 //  Created by Dhiraj Kumar Patil on 25/06/21.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class EditTableViewDataSource: TableViewDataSource, EditTableViewProtocol {
+public class DefaultEditTableViewDataSource: DefaultTableViewDataSource, EditTableViewProtocol {
     public override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }

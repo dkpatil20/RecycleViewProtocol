@@ -11,10 +11,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let viewModel = ViewModel()
-    var tableDataSource: TableViewDataSource?
+    var tableDataSource: DefaultEditTableViewDataSource?
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableDataSource = EditTableViewDataSource(tableView: tableView, tableViewModelDelegate: self, mapCellViewModelDelegate: self, registerCellDelegate: nil)
+        tableDataSource = DefaultEditTableViewDataSource(tableView: tableView, tableViewModelDelegate: self, mapCellViewModelDelegate: self, registerCellDelegate: nil)
 
         viewModel.creatSections()
         // Do any additional setup after loading the view.
