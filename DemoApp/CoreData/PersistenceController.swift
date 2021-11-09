@@ -43,12 +43,12 @@ struct PersistenceController {
   static var preview: PersistenceController = {
     let result = PersistenceController(inMemory: true)
     let viewContext = result.container.viewContext
-    for index in 1..<60 {
+    for index in 1...60 {
       let newItem = ExpenseModel(context: viewContext)
       newItem.title = "Test Title \(index)"
-      newItem.date = Date(timeIntervalSinceNow: Double(index * -21600))
+      newItem.date = Date(timeIntervalSinceNow: Double((index-1) * -21600))
       newItem.comment = "Test Comment \(index)"
-      newItem.price = Double(index + 1) * 12.3
+      newItem.price = Double(index) * 12.3
       newItem.id = UUID()
     }
     do {

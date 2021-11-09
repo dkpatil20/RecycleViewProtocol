@@ -32,5 +32,4 @@ public extension TableViewProtocol where Self: GetTableViewModelProtocol & MapCe
         }
         return cell
     }
-
 }

@@ -27,7 +27,8 @@ public extension EditTableViewProtocol where Self: GetTableViewModelProtocol & M
     }
     func internal_tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         if let moveRowItem = self.tableViewModel().deleteIteamAt(indexPaths: [sourceIndexPath]).first {
-            self.tableViewModel().insertItemAt(indexPath: destinationIndexPath, model: moveRowItem)
+            var tableViewModel = self.tableViewModel()
+            tableViewModel.insertItemAt(indexPath: destinationIndexPath, model: moveRowItem)
         }
     }
 }

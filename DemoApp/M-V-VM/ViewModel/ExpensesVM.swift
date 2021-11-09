@@ -9,9 +9,9 @@ import Foundation
 import RecycleViewProtocol
 import CoreData
 
-class ExpensesVM: ListViewModelProtocol {
+class ExpensesVM: ListViewModelProtocol, ExpensesVMProtocol {
     var sections: Observable<[SectionViewModelProtocol]> = Observable(value:[])
-    var viewContext: NSManagedObjectContext
+    private var viewContext: NSManagedObjectContext
     let reportRange: ReportRange
 
 
@@ -41,11 +41,14 @@ class ExpensesVM: ListViewModelProtocol {
     }
     
     func createTableSections() {
-        let section = DefaultSection()
-        for expenseItem in getEntries() {
-            let expenseItemVM = ExpenseViewModel(model: expenseItem)
-            section.items.append(expenseItemVM)
+        DispatchQueue.global().async {
+            let section = DefaultSection()
+            for expenseItem in self.getEntries() {
+                let expenseItemVM = ExpenseViewModel(model: expenseItem)
+                section.items.append(expenseItemVM)
+            }
+            self.sections.value = [section]
         }
-        self.sections.value = [section]
     }
+    
 }

@@ -11,8 +11,8 @@ public protocol SectionViewModelProtocol {
    
     func numberOfRowIn() -> Int
     func itemForRow(index: Int) -> ItemViewModelProtocol
-    mutating func insetIteamAt(row:Int, item: ItemViewModelProtocol)
-    mutating func deleteIteamAt(row:Int) ->ItemViewModelProtocol
+    func insetIteamAt(row:Int, item: ItemViewModelProtocol)
+    func deleteIteamAt(row:Int) ->ItemViewModelProtocol
 }
 
 public extension SectionViewModelProtocol {
@@ -22,11 +22,4 @@ public extension SectionViewModelProtocol {
     func itemForRow(index: Int) -> ItemViewModelProtocol {
         return items[index]
     }
-    mutating func insetIteamAt(row:Int, item: ItemViewModelProtocol) {
-        items.insert(item, at: row)
-    }
-    mutating func deleteIteamAt(row:Int) ->ItemViewModelProtocol {
-        return items.remove(at: row)
-    }
-
 }

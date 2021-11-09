@@ -6,6 +6,8 @@
 //
 
 import UIKit
+
+///
 public class DefaultTableViewDataSource: NSObject, UITableViewDataSource, TableViewProtocol , MapCellViewModel, GetTableViewModelProtocol{
     
     let tableViewModelDelegate: GetTableViewModelProtocol
@@ -33,18 +35,15 @@ public class DefaultTableViewDataSource: NSObject, UITableViewDataSource, TableV
     
     public func numberOfSections(in tableView: UITableView) -> Int {
         let numberOfSections = self.internal_numberOfSections(in: tableView)
-        print(#function,numberOfSections)
         return numberOfSections
     }
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let numberOfRowsInSection = self.internal_tableView(tableView, numberOfRowsInSection: section)
-        print(#function,numberOfRowsInSection)
         return numberOfRowsInSection
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.internal_tableView(tableView, cellForRowAt: indexPath)
-        print(#function, cell)
         return cell
     }
     

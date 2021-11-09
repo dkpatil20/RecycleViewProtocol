@@ -7,13 +7,17 @@
 
 import UIKit
 import RecycleViewProtocol
+protocol ExpensesVMProtocol {
+    func createTableSections()
+    var reportRange: ReportRange { get }
+}
 class ExpensesVC: UIViewController, ReuseIdentifierProtocol {
     @IBOutlet weak var tableView: UITableView!
 
-    let viewModel: ExpensesVM
+    let viewModel: ExpensesVMProtocol & ListViewModelProtocol
     var tableDataSource: DefaultTableViewDataSource?
 
-    init?(coder: NSCoder, viewModel: ExpensesVM) {
+    init?(coder: NSCoder, viewModel: ExpensesVMProtocol & ListViewModelProtocol) {
         self.viewModel = viewModel
         super.init(coder: coder)
     }
@@ -32,7 +36,7 @@ class ExpensesVC: UIViewController, ReuseIdentifierProtocol {
         // Do any additional setup after loading the view.
     }
     
-
+   
     /*
     // MARK: - Navigation
 

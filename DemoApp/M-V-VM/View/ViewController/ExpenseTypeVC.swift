@@ -7,21 +7,33 @@
 
 import UIKit
 import RecycleViewProtocol
+protocol ExpenseTypeVMProtocol {
+    func createSections()
+    func addSection()
+}
+
 class ExpenseTypeVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    let viewModel = ExpenseTypeVM()
-    var tableDataSource: DefaultTableViewDataSource?
+    let viewModel: ExpenseTypeVMProtocol & ListViewModelProtocol = ExpenseTypeVM()
+    var tableDataSource: TableViewProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableDataSource = DefaultTableViewDataSource(tableView: tableView, tableViewModelDelegate: self, mapCellViewModelDelegate: self, registerCellDelegate: self)
+        tableDataSource = DefaultTableViewDataSource(
+            tableView: tableView,
+            tableViewModelDelegate: self,
+            mapCellViewModelDelegate: self,
+            registerCellDelegate: self)
         tableView.delegate = self
         viewModel.createSections()
 
         // Do any additional setup after loading the view.
     }
-
+    @IBAction func addSectionActionn(_ sender: Any) {
+        self.viewModel.addSection()
+    }
+    
 }
 extension ExpenseTypeVC: RegisterCellProtocol {
     func registerCell() {
@@ -53,9 +65,10 @@ extension ExpenseTypeVC: MapCellViewModel {
 extension ExpenseTypeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let rangeVM = self.viewModel.itemAt(indexPath: indexPath) as? ExpenseTypeTableCellVM , let vc = self.storyboard?.instantiateViewController(identifier: ExpensesVC.reuseIdentifier(), creator: { (coder) -> UIViewController? in
-                let vm = ExpensesVM(viewContext: PersistenceController.preview.container.viewContext, reportRange: rangeVM.model)
-                return ExpensesVC(coder: coder, viewModel: vm)
-            }) {
+            let persistenceController = rangeVM.model == .daily ? PersistenceController.preview : PersistenceController.preview
+            let vm = ExpensesVM(viewContext: persistenceController.container.viewContext, reportRange: rangeVM.model)
+            return ExpensesVC(coder: coder, viewModel: vm)
+        }) {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

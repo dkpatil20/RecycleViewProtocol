@@ -7,7 +7,7 @@
 
 import Foundation
 import RecycleViewProtocol
-class ExpenseTypeVM: ListViewModelProtocol {
+class ExpenseTypeVM: ListViewModelProtocol, ExpenseTypeVMProtocol {
     var sections: Observable<[SectionViewModelProtocol]> = Observable(value: [])
     
     func createSections() {
@@ -17,4 +17,13 @@ class ExpenseTypeVM: ListViewModelProtocol {
         }
         self.sections.value = [defaulSection]
     }
+    
+    func addSection() {
+        let defaulSection = DefaultSection()
+        for expenseType in ReportRange.allCases {
+            defaulSection.items.append(ExpenseTypeTableCellVM(model: expenseType))
+        }
+        self.insert(section: defaulSection)
+    }
+    
 }
